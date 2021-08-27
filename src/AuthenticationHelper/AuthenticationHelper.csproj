@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<AssemblyName>ShipService.Infrastructure.AuthenticationHelper</AssemblyName>
+		<RootNamespace>ShipService.Infrastructure.AuthenticationHelper</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Google.Protobuf" Version="3.13.0" />
+		<PackageReference Include="Grpc.Net.ClientFactory" Version="2.32.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.32.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Core.Message\Core.UserContextProvider.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Protobuf Include="..\AuthenticationQueryHost\Protos\authquery.proto" GrpcServices="Client">
+	    <Link>Protos\authquery.proto</Link>
+	  </Protobuf>
+	</ItemGroup>
+
+</Project>

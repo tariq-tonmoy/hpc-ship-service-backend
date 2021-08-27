@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<AssemblyName>ShipService.Infrastructure.Ship.Grpc.Comm</AssemblyName>
+		<RootNamespace>ShipService.Infrastructure.Ship.Grpc.Comm</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Google.Protobuf" Version="3.13.0" />
+		<PackageReference Include="Grpc.Net.ClientFactory" Version="2.32.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.32.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Host\Host.csproj" />
+		<ProjectReference Include="..\Utilties\Utilties.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="..\NotificationHost\Protos\notificationEvent.proto" GrpcServices="Client">
+		  <Link>Protos\notificationEvent.proto</Link>
+		</Protobuf>
+		<Protobuf Include="..\Protos\shipCommand.proto" GrpcServices="Client">
+			<Link>Protos\shipCommand.proto</Link>
+		</Protobuf>
+		<Protobuf Include="..\Protos\shipEvent.proto" GrpcServices="Client">
+			<Link>Protos\shipEvent.proto</Link>
+		</Protobuf>
+	</ItemGroup>
+
+</Project>

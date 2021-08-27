@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<AssemblyName>ShipService.Application.Protos</AssemblyName>
+		<RootNamespace>ShipService.Application.Protos</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+	</ItemGroup>
+
+</Project>

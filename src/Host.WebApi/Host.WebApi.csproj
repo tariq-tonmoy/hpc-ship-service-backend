@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<AssemblyName>ShipService.Infrastructure.Host.WebApi</AssemblyName>
+		<RootNamespace>ShipService.Infrastructure.Host.WebApi</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.9" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\AuthenticationHelper\AuthenticationHelper.csproj" />
+		<ProjectReference Include="..\Host.Grpc\Host.Grpc.csproj" />
+	</ItemGroup>
+
+</Project>

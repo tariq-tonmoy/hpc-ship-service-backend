@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<AssemblyName>ShipService.Infrastructure.Host.Worker</AssemblyName>
+		<RootNamespace>ShipService.Infrastructure.Host.Worker</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Host.Grpc\Host.Grpc.csproj" />
+	</ItemGroup>
+
+</Project>

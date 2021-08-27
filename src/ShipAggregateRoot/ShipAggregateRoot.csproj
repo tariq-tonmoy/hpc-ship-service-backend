@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<AssemblyName>ShipService.Domain.ShipAggregateRoot</AssemblyName>
+		<RootNamespace>ShipService.Domain.ShipAggregateRoot</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Core\Core.csproj" />
+	  <ProjectReference Include="..\DomainService\DomainService.csproj" />
+	  <ProjectReference Include="..\SharedDto\SharedDto.csproj" />
+	  <ProjectReference Include="..\ShipEvents\ShipEvents.csproj" />
+	</ItemGroup>
+
+</Project>

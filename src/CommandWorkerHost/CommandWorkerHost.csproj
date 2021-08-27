@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net5.0</TargetFramework>
+		<AssemblyName>ShipService.Application.CommandWorkerHost</AssemblyName>
+		<RootNamespace>ShipService.Application.CommandWorkerHost</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Grpc.AspNetCore" Version="2.34.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\CommandHandlers\CommandHandlers.csproj" />
+		<ProjectReference Include="..\Core\Core.csproj" />
+		<ProjectReference Include="..\DomainService\DomainService.csproj" />
+		<ProjectReference Include="..\Grpc.Comm\Ship.Grpc.Comm.csproj" />
+		<ProjectReference Include="..\Host.WebApi\Host.WebApi.csproj" />
+		<ProjectReference Include="..\Host.Worker\Host.Worker.csproj" />
+		<ProjectReference Include="..\Ship.Cqrs.Repository.Sqlite\Ship.Cqrs.Repository.Sqlite.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Protobuf Include="..\Protos\shipCommand.proto" GrpcServices="Server">
+	    <Link>Protos\shipCommand.proto</Link>
+	  </Protobuf>
+	</ItemGroup>
+	<ItemGroup>
+		<Content Update="appsettings.develop.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="appsettings.Development.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+</Project>

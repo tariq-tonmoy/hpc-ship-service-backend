@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<AssemblyName>ShipService.Application.CommandHandlers</AssemblyName>
+		<RootNamespace>ShipService.Application.CommandHandlers</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Commands\Commands.csproj" />
+		<ProjectReference Include="..\Cqrs.Repository.Contract\Cqrs.Repository.Contract.csproj" />
+		<ProjectReference Include="..\DomainService\DomainService.csproj" />
+		<ProjectReference Include="..\Grpc.Comm\Ship.Grpc.Comm.csproj" />
+		<ProjectReference Include="..\ShipAggregateRoot\ShipAggregateRoot.csproj" />
+	</ItemGroup>
+
+</Project>

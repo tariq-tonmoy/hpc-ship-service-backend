@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "ShipService.External.AuthenticationQueryHost.Protos";
+
+service AuthQuery {
+  rpc Authenticate (AuthQueryModel) returns (AuthQueryResponseModel);
+}
+
+message AuthQueryModel{
+	string Username = 1;
+	string Password = 2;
+}
+
+message AuthQueryResponseModel{
+	string Username = 1;
+	string UserId = 2;
+	string Role = 3;
+	bool IsAuthenticated = 4;
+}
