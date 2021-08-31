@@ -16,6 +16,7 @@
 		<ProjectReference Include="..\Authentication.Cqrs.Repository.Sqlite\Authentication.Cqrs.Repository.Sqlite.csproj" />
 		<ProjectReference Include="..\AuthViewModel\AuthViewModel.csproj" />
 		<ProjectReference Include="..\Cqrs.Repository.Sqlite\Cqrs.Repository.Sqlite.csproj" />
+		<ProjectReference Include="..\Host.WebApi\Host.WebApi.csproj" />
 		<ProjectReference Include="..\Host.Worker\Host.Worker.csproj" />
 	</ItemGroup>
 

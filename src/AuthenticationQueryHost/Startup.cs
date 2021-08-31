@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ShipService.External.AuthenticationQueryHost.Abstractions;
+using ShipService.External.AuthenticationQueryHost.Service.Imps;
+using ShipService.Infrastructure.Host.WebApi.Extensions;
 
 namespace ShipService.External.AuthenticationQueryHost
 {
@@ -26,7 +29,8 @@ namespace ShipService.External.AuthenticationQueryHost
         {
             services.AddServiceDiscovery(configuration);
             services.AddGrpcServerMessageConfigurations();
-
+            services.AddHttpComponents(needBasicAuthentication: false);
+            services.AddScoped<IAuthenticationServiceProvider, AuthenticationServiceProvider>();
             services.AddSqliteRepository()
                     .BuildReadRepository<AuthenticationViewModel, AuthenticationViewModelDbContext>();
 
@@ -36,6 +40,7 @@ namespace ShipService.External.AuthenticationQueryHost
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseRouting();
+            app.UseHttpPipeline();
             app.UseGrpcServerMessageConfigurations(this.services, this.ConfigureMessageServices);
         }
 

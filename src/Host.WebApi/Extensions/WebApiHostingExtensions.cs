@@ -15,7 +15,7 @@ namespace ShipService.Infrastructure.Host.WebApi.Extensions
 {
     public static class WebApiHostingExtensions
     {
-        public static IServiceCollection AddHttpComponents(this IServiceCollection services)
+        public static IServiceCollection AddHttpComponents(this IServiceCollection services, bool needBasicAuthentication = true)
         {
             services.AddMvcCore((options) =>
             {
@@ -28,8 +28,16 @@ namespace ShipService.Infrastructure.Host.WebApi.Extensions
             .AddNewtonsoftJson()
             .AddCors();
 
+
             services.AddAuthorization();
-            services.AddBasicAuthentication();
+            if (needBasicAuthentication)
+            {
+                services.AddBasicAuthentication();
+            }
+            else
+            {
+                services.AddAuthentication();
+            }
 
             services.AddHealthChecks();
 
@@ -46,7 +54,7 @@ namespace ShipService.Infrastructure.Host.WebApi.Extensions
 
             var serviceProvider = services.BuildServiceProvider();
             GrpcMessgaeConfigurator grpcMessageConfiurator = (GrpcMessgaeConfigurator)serviceProvider.GetRequiredService<IMessageConfigurator>();
-            
+
             messageConfiguratorAction(services, serviceProvider.GetRequiredService<IDiscoverServices>(), grpcMessageConfiurator);
 
             var grpcConfigurationBuilder = new GrpcClientMessageConfigurationBuilder(services, grpcMessageConfiurator.GetGrpcClientMessageConfigurationOptions());

@@ -44,6 +44,7 @@ services:
       - ship-net
     ports:
       - 127.0.0.40:8088:80
+      - 127.0.0.40:8188:8080
   ship_query_host:
     image: ship/ship_query_host
     build:

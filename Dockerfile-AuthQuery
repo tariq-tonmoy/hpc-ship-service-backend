@@ -19,6 +19,7 @@ WORKDIR /app
 COPY --from=publish /app/dist ./
 
 EXPOSE 80
+EXPOSE 8080
 
 ENV ASPNETCORE_ENVIRONMENT develop
 

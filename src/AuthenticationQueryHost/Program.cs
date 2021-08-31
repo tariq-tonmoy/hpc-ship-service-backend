@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System;
-
+using System.Net;
 
 namespace ShipService.External.AuthenticationQueryHost
 {
@@ -27,6 +28,22 @@ namespace ShipService.External.AuthenticationQueryHost
             })
             .ConfigureWebHostDefaults(webBuilder =>
             {
+                webBuilder.ConfigureKestrel(serverOptions =>
+                {
+
+                    var httpPort = configuration.GetValue<int>("HttpPort");
+                    var http2Port = configuration.GetValue<int>("Http2Port");
+
+                    serverOptions.Listen(IPAddress.Any, http2Port, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http2;
+                    });
+                    serverOptions.Listen(IPAddress.Any, httpPort, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http1;
+                    });
+                });
+
                 webBuilder
                     .UseStartup<Startup>();
             });

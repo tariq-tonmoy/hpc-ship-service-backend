@@ -23,6 +23,11 @@ namespace ShipService.ReadSilde.ShipQueryHost.Service.Imps
 
         private static QueryResponsePayload GetQueryResponseStructure(ShipViewModel viewModel)
         {
+            if (viewModel == null)
+            {
+                return null;
+            }
+
             return new QueryResponsePayload()
             {
                 Code = viewModel.Code,

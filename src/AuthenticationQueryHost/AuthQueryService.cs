@@ -1,35 +1,34 @@
 ﻿using Grpc.Core;
+using ShipService.External.AuthenticationQueryHost.Abstractions;
 using ShipService.External.AuthenticationQueryHost.Protos;
-using ShipService.External.AuthViewModel;
-using ShipService.Infrastructure.Cqrs.Repository.Contract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using static ShipService.External.AuthenticationQueryHost.Protos.AuthQuery;
 
 namespace ShipService.External.AuthenticationQueryHost
 {
     public class AuthQueryService : AuthQuery.AuthQueryBase
     {
-        private readonly IReadRepository<AuthenticationViewModel> readRepository;
+        private readonly IAuthenticationServiceProvider authService;
 
-        public AuthQueryService(IReadRepository<AuthenticationViewModel> readRepository)
+        public AuthQueryService(IAuthenticationServiceProvider authService)
         {
-            this.readRepository = readRepository;
+            this.authService = authService;
         }
 
         public override Task<AuthQueryResponseModel> Authenticate(AuthQueryModel query, ServerCallContext context)
         {
-            var dbResponse = readRepository.GetByFilter(x => x.Username == query.Username && x.Password == query.Password).FirstOrDefault();
+            var response = this.authService.Authenticate(new Models.AuthQuery()
+            {
+                Username = query.Username,
+                Password = query.Password,
+            });
 
             AuthQueryResponseModel responseModel = new AuthQueryResponseModel();
-            if (dbResponse != null)
+            if (response != null)
             {
-                responseModel.IsAuthenticated = true;
-                responseModel.UserId = dbResponse.Id.ToString();
-                responseModel.Username = dbResponse.Username;
-                responseModel.Role = dbResponse.Role;
+                responseModel.IsAuthenticated = response.IsAuthenticated;
+                responseModel.UserId = response.UserId.ToString();
+                responseModel.Username = response.Username;
+                responseModel.Role = response.Role;
             }
 
             return Task.FromResult(responseModel);
