@@ -24,7 +24,7 @@ namespace ShipService.External.AuthenticationQueryHost.Controllers
         {
             var resp = this.authService.Authenticate(query);
 
-            return this.Ok(resp.IsAuthenticated);
+            return this.Ok(resp);
         }
     }
 }

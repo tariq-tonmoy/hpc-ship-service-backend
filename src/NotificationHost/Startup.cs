@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Routing;
 using ShipService.External.NotificationHost.Hubs;
 using ShipService.External.NotificationHost.Models;
 using ShipService.External.NotificationHost.Repository;
+using System;
 
 namespace ShipService.External.NotificationHost
 {
@@ -27,6 +28,7 @@ namespace ShipService.External.NotificationHost
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvcCore().AddCors();
             services.AddServiceDiscovery(configuration);
             services.AddGrpcServerMessageConfigurations();
             services.AddUtilities();
@@ -40,6 +42,14 @@ namespace ShipService.External.NotificationHost
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseRouting();
+
+            app.UseCors((corsPolicyBuilder) =>
+                   corsPolicyBuilder
+                   .AllowAnyHeader()
+                   .AllowAnyMethod()
+                   .SetIsOriginAllowed((string origin) => true)
+                   .AllowCredentials()
+                   .SetPreflightMaxAge(TimeSpan.FromDays(365)));
             app.UseGrpcServerMessageConfigurations(this.services, this.ConfigureMessageServices, this.ConfigureRouteAction);
         }
 
